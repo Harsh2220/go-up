@@ -7,29 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model comments {
-  id         BigInt    @id @unique
-  created_at DateTime? @default(now()) @db.Timestamptz(6)
-  project_id BigInt    @unique
-  comment    String    @db.VarChar
-  user_id    BigInt    @unique
-  projects   projects  @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model profile {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  created_at  DateTime  @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  auth_id     String    @unique @db.VarChar
+  name        String    @db.VarChar
+  description String?   @db.VarChar
+  image       String?   @db.VarChar
+  project     project[]
 }
 
-model projects {
-  id                  BigInt    @id @unique
-  created_at          DateTime? @default(now()) @db.Timestamptz(6)
-  user_id             BigInt?
-  project_name        String    @db.VarChar
-  project_description String    @db.VarChar
-  user                user?     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  comments            comments?
-}
-
-model user {
-  id          BigInt     @id
-  created_at  DateTime?  @default(now()) @db.Timestamptz(6)
-  name        String?    @db.VarChar
-  description String?    @db.VarChar
-  projects    projects[]
+model project {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  created_at  DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  name        String   @db.VarChar
+  description String?  @db.VarChar
+  link        String?  @db.VarChar
+  user_id     String?  @db.VarChar
+  profile     profile? @relation(fields: [user_id], references: [auth_id], onDelete: NoAction, onUpdate: NoAction)
 }
