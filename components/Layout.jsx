@@ -3,6 +3,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { currentUser } from "../context/slices/userSlice";
+import { allProjects } from "../context/slices/projectSlice";
 
 export default function Layout({ children }) {
   const { user, error, isLoading } = useUser();
@@ -25,6 +26,17 @@ export default function Layout({ children }) {
         .then((res) => res.json())
         .then((data) => {
           dispatch(currentUser(data.user));
+        });
+
+      fetch("/api/getProjects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(allProjects(data.allProjects));
         });
     }
   }, [dispatch, user]);

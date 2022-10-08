@@ -18,6 +18,7 @@ import {
   Flex,
   Divider,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import { BiPlus } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
@@ -40,7 +41,7 @@ export default function ProfileCard() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editProfile, setEditProfile] = useState(false);
   const user = useSelector((state) => state.userData);
-
+  const toast = useToast();
   const dispatch = useDispatch();
 
   const [userData, setuserData] = useState({
@@ -81,6 +82,12 @@ export default function ProfileCard() {
           .then((res) => res.json())
           .then((data) => {
             dispatch(currentUser(data.user));
+            toast({
+              title: "Profile updated successfully",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
           });
       }
     } else {
@@ -95,7 +102,12 @@ export default function ProfileCard() {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            toast({
+              title: "Project added successfully",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
           });
       }
     }

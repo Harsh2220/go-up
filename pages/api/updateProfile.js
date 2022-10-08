@@ -13,8 +13,8 @@ export default async function handler(req, res) {
           auth_id: user_id,
         },
         data: {
-          name: name,
-          description: description,
+          name,
+          description,
         },
       });
       res.status(200).json({ user: user });

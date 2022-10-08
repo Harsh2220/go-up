@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { currentUser } from "./slices/userSlice";
 import currentUserReducer from "./slices/userSlice";
+import allProjectsReducer from "./slices/projectSlice";
 
 export const store = configureStore({
   reducer: {
     userData: currentUserReducer,
+    projectsData: allProjectsReducer,
   },
 });
