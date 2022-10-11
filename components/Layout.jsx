@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { currentUser } from "../context/slices/userSlice";
+import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
 
 export default function Layout({ children }) {
@@ -12,7 +12,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     if (user) {
-      const user_id = user?.sid;
+      const user_id = user?.email;
       const name = user?.name;
       const image = user?.picture;
 
@@ -27,19 +27,31 @@ export default function Layout({ children }) {
         .then((data) => {
           dispatch(currentUser(data.user));
         });
-
-      fetch("/api/getProjects", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch(allProjects(data.allProjects));
-        });
     }
   }, [dispatch, user]);
+
+  useEffect(() => {
+    fetch("/api/getProjects", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(allProjects(data.allProjects));
+      });
+    fetch("/api/getUsers", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(allUsers(data.allUsers));
+      });
+  });
 
   return (
     <>

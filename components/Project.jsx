@@ -10,16 +10,14 @@ import {
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-export default function Project({ name, desc, image, date }) {
+export default function Project({ name, desc, image, date, user, user_image }) {
   // const [like, setLike] = useState(false);
-
-  console.log(date);
 
   return (
     <Box
       maxW={"sm"}
       bg="white"
-      boxShadow={"2xl"}
+      boxShadow={"lg"}
       rounded={"lg"}
       p={6}
       my={5}
@@ -38,13 +36,12 @@ export default function Project({ name, desc, image, date }) {
         </Text>
       </Stack>
       <HStack mt={6} justifyContent="space-between">
-        <Stack direction={"row"} spacing={4} align={"center"}>
-          <Avatar
-            src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2831&q=80"
-            name="John Doe"
-          />
+        <Stack direction={"row"} spacing={3} align={"center"}>
+          <Avatar src={user_image} name={user} size={"md"} />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-            <Text fontWeight={600}>John Doe</Text>
+            <Text fontSize={"md"} fontWeight={"semibold"}>
+              {user}
+            </Text>
             <Text color={"gray.500"}>{date}</Text>
           </Stack>
         </Stack>
