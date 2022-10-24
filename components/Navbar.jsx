@@ -12,17 +12,26 @@ import {
   MenuDivider,
   Container,
   Text,
+  Img,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const user = useSelector((state) => state.userData);
+  const router = useRouter();
 
   return (
     <Box bg="gray.100" position={"sticky"} top={0} zIndex="1">
       <Container maxW={"8xl"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>Logo</Box>
+          <Box
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            <Img src="logo.svg" boxSize={"20"} />
+          </Box>
           <HStack as={"nav"} spacing={4}>
             {user.authenticated ? (
               <Flex alignItems={"center"}>
@@ -43,13 +52,21 @@ export default function Navbar() {
                     />
                   </MenuButton>
                   <MenuList>
-                    <chakra.a href="/profile">
-                      <MenuItem>Profile</MenuItem>
-                    </chakra.a>
+                    <MenuItem
+                      onClick={() => {
+                        router.push("/profile");
+                      }}
+                    >
+                      Profile
+                    </MenuItem>
                     <MenuDivider />
-                    <chakra.a href="/api/auth/logout">
-                      <MenuItem>Signout</MenuItem>
-                    </chakra.a>
+                    <MenuItem
+                      onClick={() => {
+                        router.push("/api/auth/logout");
+                      }}
+                    >
+                      Signout
+                    </MenuItem>
                   </MenuList>
                 </Menu>
               </Flex>

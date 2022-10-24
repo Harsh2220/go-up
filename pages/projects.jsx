@@ -2,7 +2,7 @@ import { Container, Flex } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import Project from "../components/Project";
 
-export default function projects() {
+export default function Projects() {
   const projects = useSelector((state) => state.projectsData);
   const user = useSelector((state) => state.userData);
 

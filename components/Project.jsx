@@ -36,13 +36,15 @@ export default function Project({ name, desc, image, date, user, user_image }) {
         </Text>
       </Stack>
       <HStack mt={6} justifyContent="space-between">
-        <Stack direction={"row"} spacing={3} align={"center"}>
+        <Stack direction={"row"} spacing={3} alignItems="center">
           <Avatar src={user_image} name={user} size={"md"} />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-            <Text fontSize={"md"} fontWeight={"semibold"}>
+            <Text fontSize={"md"} fontWeight={"semibold"} lineHeight={"1"}>
               {user}
             </Text>
-            <Text color={"gray.500"}>{date}</Text>
+            <Text color={"gray.500"} fontSize={"xs"} fontWeight={"medium"}>
+              {date.split("T")[0]}
+            </Text>
           </Stack>
         </Stack>
         {/* <Stack alignItems="center" justifyContent="center">

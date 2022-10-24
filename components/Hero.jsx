@@ -11,7 +11,7 @@ import { BsArrowRight } from "react-icons/bs";
 
 export default function Hero() {
   return (
-    <Container maxW={"8xl"} minH="100vh">
+    <Container maxW={"8xl"}>
       <Box px={8} py={24} mx="auto">
         <Box
           w={{
@@ -72,9 +72,8 @@ export default function Hero() {
               color: "gray.300",
             }}
           >
-            Hellonext is a feature voting software where you can allow your
-            users to vote on features, publish roadmap, and complete your
-            project feedback loop.
+            GoUp is a feedback app where you can add you projects and give
+            feedback to the other users projects.
           </Text>
           <chakra.a href="/projects">
             <Button
@@ -94,11 +93,11 @@ export default function Hero() {
               size="lg"
               cursor="pointer"
             >
-              Get Started
+              Explore projects
             </Button>
           </chakra.a>
         </Box>
-        <Box
+        {/* <Box
           w={{
             base: "full",
             md: 10 / 12,
@@ -114,7 +113,7 @@ export default function Hero() {
             src="https://kutty.netlify.app/hero.jpg"
             alt="Hellonext feedback boards software screenshot"
           />
-        </Box>
+        </Box> */}
       </Box>
       ;
     </Container>
