@@ -3,7 +3,7 @@ import ProjectCard from "../components/ProjectCard";
 import ProfileCard from "../components/ProfileCard";
 import { useSelector } from "react-redux";
 
-export default function profile() {
+export default function Profile() {
   const projects = useSelector((state) => state.projectsData);
   const user = useSelector((state) => state.userData);
 
