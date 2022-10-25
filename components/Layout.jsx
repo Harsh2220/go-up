@@ -4,31 +4,49 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
+import { useToast } from "@chakra-ui/react";
 
 export default function Layout({ children }) {
   const { user, error, isLoading } = useUser();
-
   const dispatch = useDispatch();
+  const toast = useToast();
+
+  const setUser = async () => {
+    const user_id = user?.email;
+    const name = user?.name;
+    const image = user?.picture;
+
+    const setUser = await fetch("/api/setuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_id, name, image }),
+    });
+    const UserData = await setUser.json();
+    if (!setUser.ok) {
+      toast({
+        title: "Something went wrong!!",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      dispatch(currentUser(UserData.user));
+      toast({
+        title: "Logged in succesfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   useEffect(() => {
-    if (user) {
-      const user_id = user?.email;
-      const name = user?.name;
-      const image = user?.picture;
-
-      fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id, name, image }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch(currentUser(data.user));
-        });
+    if (!isLoading) {
+      setUser();
     }
-  }, [dispatch, user]);
+  }, [isLoading]);
 
   useEffect(() => {
     fetch("/api/getProjects", {

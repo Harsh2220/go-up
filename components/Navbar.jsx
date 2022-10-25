@@ -29,6 +29,7 @@ export default function Navbar() {
             onClick={() => {
               router.push("/");
             }}
+            cursor="pointer"
           >
             <Img src="logo.svg" boxSize={"20"} />
           </Box>

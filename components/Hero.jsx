@@ -7,9 +7,12 @@ import {
   Image,
   chakra,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { BsArrowRight } from "react-icons/bs";
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <Container maxW={"8xl"}>
       <Box px={8} py={24} mx="auto">
@@ -75,27 +78,28 @@ export default function Hero() {
             GoUp is a feedback app where you can add you projects and give
             feedback to the other users projects.
           </Text>
-          <chakra.a href="/projects">
-            <Button
-              colorScheme="purple"
-              display="inline-flex"
-              alignItems="center"
-              justifyContent="center"
-              rightIcon={<BsArrowRight />}
-              w={{
-                base: "full",
-                sm: "auto",
-              }}
-              mb={{
-                base: 2,
-                sm: 0,
-              }}
-              size="lg"
-              cursor="pointer"
-            >
-              Explore projects
-            </Button>
-          </chakra.a>
+          <Button
+            colorScheme="purple"
+            display="inline-flex"
+            alignItems="center"
+            justifyContent="center"
+            rightIcon={<BsArrowRight />}
+            w={{
+              base: "full",
+              sm: "auto",
+            }}
+            mb={{
+              base: 2,
+              sm: 0,
+            }}
+            onClick={() => {
+              router.push("/projects");
+            }}
+            size="lg"
+            cursor="pointer"
+          >
+            Explore projects
+          </Button>
         </Box>
         {/* <Box
           w={{

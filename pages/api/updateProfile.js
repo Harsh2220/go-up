@@ -5,9 +5,6 @@ export default async function handler(req, res) {
     try {
       const { user_id, name, description } = req.body;
 
-      console.log(req.body);
-      console.log(user_id, name, description);
-
       const user = await prisma.profile.update({
         where: {
           auth_id: user_id,

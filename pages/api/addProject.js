@@ -5,8 +5,6 @@ export default async function handler(req, res) {
     try {
       const { user_id, name, description, link } = req.body;
 
-      console.log(user_id, name, description);
-
       const project = await prisma.project.create({
         data: {
           user_id,
