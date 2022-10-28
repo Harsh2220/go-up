@@ -1,10 +1,11 @@
 import Navbar from "./Navbar";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
 import { useToast } from "@chakra-ui/react";
+import { allComments } from "../context/slices/commentSlice";
 
 export default function Layout({ children }) {
   const { user, error, isLoading } = useUser();
@@ -26,7 +27,7 @@ export default function Layout({ children }) {
     const UserData = await setUser.json();
     if (!setUser.ok) {
       toast({
-        title: "Something went wrong!!",
+        title: "Please login to explore !!",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -39,6 +40,19 @@ export default function Layout({ children }) {
         duration: 5000,
         isClosable: true,
       });
+    }
+  };
+
+  const getComments = async () => {
+    const getComment = await fetch("/api/getComments", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const comments = await getComment.json();
+    if (getComment.ok) {
+      dispatch(allComments(comments));
     }
   };
 
@@ -59,6 +73,7 @@ export default function Layout({ children }) {
       .then((data) => {
         dispatch(allProjects(data.allProjects));
       });
+
     fetch("/api/getUsers", {
       method: "GET",
       headers: {
@@ -69,6 +84,7 @@ export default function Layout({ children }) {
       .then((data) => {
         dispatch(allUsers(data.allUsers));
       });
+    getComments();
   });
 
   return (

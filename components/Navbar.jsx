@@ -31,12 +31,17 @@ export default function Navbar() {
             }}
             cursor="pointer"
           >
-            <Img src="logo.svg" boxSize={"20"} />
+            <Img src="/logo.svg" boxSize={"20"} />
           </Box>
           <HStack as={"nav"} spacing={4}>
             {user.authenticated ? (
               <Flex alignItems={"center"}>
-                <Text fontSize="md" fontWeight="semibold" mr="3">
+                <Text
+                  fontSize="md"
+                  fontWeight="semibold"
+                  mr="3"
+                  display={["none", "block"]}
+                >
                   {user.currentUser?.name}
                 </Text>
                 <Menu>
@@ -72,22 +77,23 @@ export default function Navbar() {
                 </Menu>
               </Flex>
             ) : (
-              <chakra.a href="/api/auth/login">
-                <Button
-                  colorScheme="green"
-                  display="inline-flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  w={{
-                    base: "full",
-                    sm: "auto",
-                  }}
-                  size="md"
-                  cursor="pointer"
-                >
-                  Get Started
-                </Button>
-              </chakra.a>
+              <Button
+                colorScheme="green"
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+                w={{
+                  base: "full",
+                  sm: "auto",
+                }}
+                size="md"
+                cursor="pointer"
+                onClick={() => {
+                  router.push("/api/auth/login");
+                }}
+              >
+                Get Started
+              </Button>
             )}
           </HStack>
         </Flex>

@@ -22,9 +22,10 @@ export default function Profile() {
             project.user_id === user.currentUser?.auth_id ? (
               <ProjectCard
                 key={project.id}
+                id={project.id}
                 name={project.name}
                 desc={project.description}
-                image={project.link}
+                image={project.image}
               />
             ) : null
           )}

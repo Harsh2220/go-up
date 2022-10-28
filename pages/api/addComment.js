@@ -3,23 +3,23 @@ import prisma from "../../lib/prisma";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const { user_id, name, description, image, github, link } = req.body;
+      const { user_id, comment, project_id } = req.body;
 
-      const project = await prisma.project.create({
+      console.log(req.body);
+
+      const addedComment = await prisma.comments.create({
         data: {
-          name,
-          description,
-          image,
-          github,
-          link,
-          profile: {
+          user_id,
+          comment,
+          project: {
             connect: {
-              auth_id: user_id,
+              id: project_id,
             },
           },
         },
       });
-      res.status(200).json(project);
+      console.log(addedComment);
+      res.status(200).json(addedComment);
     } catch (error) {
       console.log(error);
       res.status(400).json({ error });

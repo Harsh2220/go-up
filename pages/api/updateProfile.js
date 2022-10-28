@@ -1,7 +1,7 @@
 import prisma from "../../lib/prisma";
 
 export default async function handler(req, res) {
-  if (req.method === "POST") {
+  if (req.method === "PUT") {
     try {
       const { user_id, name, description } = req.body;
 

@@ -1,27 +1,79 @@
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Stack,
+  Avatar,
+  Img,
+  HStack,
+  Button,
+  Flex,
+} from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import {
+  AiOutlineHeart,
+  AiFillHeart,
+  AiOutlineArrowRight,
+} from "react-icons/ai";
+import { BsArrowRight } from "react-icons/bs";
 
-export default function ProjectCard({ name, desc, image }) {
+export default function ProjectCard({ id, name, desc, image }) {
+  // const [like, setLike] = useState(false);
+  const router = useRouter();
+
   return (
-    <Flex mt={10} mx={["unset", 4]} alignItems="center" justifyContent="center">
-      <Box maxW="xs" mx="auto" bg="white" boxShadow="lg" rounded="lg">
-        <Image
-          h={48}
-          w="full"
-          fit="cover"
-          mb={2}
-          roundedTop="lg"
-          src={image}
-          alt={name}
-        />
-        <Box p={3}>
-          <Heading color="gray.800" fontWeight="bold" fontSize="2xl">
+    <Box
+      w={["full", "sm"]}
+      boxShadow={"lg"}
+      rounded={"lg"}
+      my={5}
+      mx={[0, 5]}
+      overflow={"hidden"}
+      bg="white"
+    >
+      <Box h={"200px"}>
+        <Img src={image} objectFit="cover" h="full" w="full" />
+      </Box>
+      <Flex flexDir={"column"} p={4}>
+        <Box>
+          <Heading fontSize={"2xl"} noOfLines={1}>
             {name}
           </Heading>
-          <Text mt={2} fontSize="sm" color="gray.600" noOfLines={3}>
+          <Text color={"gray.500"} noOfLines={5}>
             {desc}
           </Text>
         </Box>
-      </Box>
-    </Flex>
+        <HStack mt={6} justifyContent="space-between">
+          <Button
+            colorScheme="purple"
+            size="md"
+            cursor="pointer"
+            rightIcon={<BsArrowRight />}
+            onClick={() => {
+              router.push(`/project/${id}`);
+            }}
+          >
+            View More
+          </Button>
+          {/* <Stack alignItems="center" justifyContent="center">
+            {like ? (
+              <AiFillHeart
+                fontSize={"28px"}
+                onClick={() => setLike(false)}
+                fill="red"
+                cursor="pointer"
+              />
+            ) : (
+              <AiOutlineHeart
+                fontSize={"28px"}
+                onClick={() => setLike(true)}
+                cursor="pointer"
+              />
+            )}
+          </Stack> */}
+        </HStack>
+      </Flex>
+    </Box>
   );
 }

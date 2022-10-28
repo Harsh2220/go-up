@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <Container maxW={"8xl"}>
-      <Box px={8} py={24} mx="auto">
+      <Box px={["unset", 8]} py={24} mx="auto">
         <Box
           w={{
             base: "full",
@@ -119,7 +119,6 @@ export default function Hero() {
           />
         </Box> */}
       </Box>
-      ;
     </Container>
   );
 }

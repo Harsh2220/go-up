@@ -18,11 +18,23 @@ model profile {
 }
 
 model project {
-  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  created_at  DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
-  name        String   @db.VarChar
-  description String?  @db.VarChar
-  link        String?  @db.VarChar
-  user_id     String?  @db.VarChar
-  profile     profile? @relation(fields: [user_id], references: [auth_id], onDelete: NoAction, onUpdate: NoAction)
+  id          String     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  created_at  DateTime   @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  name        String     @db.VarChar
+  description String?    @db.VarChar
+  image       String?    @db.VarChar
+  user_id     String?    @db.VarChar
+  github      String?    @db.VarChar
+  link        String?    @db.VarChar
+  profile     profile?   @relation(fields: [user_id], references: [auth_id], onDelete: NoAction, onUpdate: NoAction)
+  comments    comments[]
+}
+
+model comments {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  created_at DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  comment    String   @db.VarChar
+  user_id    String   @db.VarChar
+  project    project? @relation(fields: [project_id], references: [id])
+  project_id String?  @db.Uuid
 }

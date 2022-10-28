@@ -3,12 +3,12 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import { store } from "../context/store";
 import Layout from "../components/Layout";
-import "../styles/globals.css";
+import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <UserProvider>
           <Layout>
             <Component {...pageProps} />

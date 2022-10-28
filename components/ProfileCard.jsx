@@ -1,7 +1,6 @@
 import {
   Avatar,
   Button,
-  Heading,
   HStack,
   Stack,
   Text,
@@ -22,19 +21,10 @@ import {
 } from "@chakra-ui/react";
 import { BiPlus } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUser } from "../context/slices/userSlice";
-
-const Links = [
-  { icon: <FaGithub fontSize="24px" />, link: "https://github.com/harsh2220" },
-  {
-    icon: <FaLinkedin fontSize="24px" />,
-    link: "https://www.linkedin.com/in/harsh2220/",
-  },
-  { icon: <FaTwitter fontSize="24px" />, link: "https://twitter.com/hrs_2220" },
-];
+import { allProjects } from "../context/slices/projectSlice";
 
 export default function ProfileCard() {
   const addProject = useRef();
@@ -54,7 +44,9 @@ export default function ProfileCard() {
     user_id: "",
     name: "",
     description: "",
-    link: "",
+    image: null,
+    github: null,
+    link: null,
   });
 
   const handleChange = (e) => {
@@ -68,47 +60,61 @@ export default function ProfileCard() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (editProfile) {
       if (user.currentUser !== null) {
         userData.user_id = user.currentUser.auth_id;
-        fetch("/api/updateProfile", {
-          method: "POST",
+        const update = await fetch("/api/updateProfile", {
+          method: "PUT",
           headers: {
-            "Content-Type": "application/json",
+            "Content-type": "application/json",
           },
           body: JSON.stringify(userData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            dispatch(currentUser(data.user));
-            toast({
-              title: "Profile updated successfully",
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-            });
+        });
+        const updatedData = await update.json();
+        if (update.ok) {
+          dispatch(currentUser(updatedData.user));
+          toast({
+            title: "Profile updated succesfully.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
           });
+        } else {
+          toast({
+            title: "Some errored occured !",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     } else {
       if (user.currentUser !== null) {
         project.user_id = user.currentUser.auth_id;
-        fetch("/api/addProject", {
+        const addProject = await fetch("/api/addProject", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-type": "application/json ",
           },
           body: JSON.stringify(project),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            toast({
-              title: "Project added successfully",
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-            });
+        });
+        const projectData = await addProject.json();
+        if (addProject.ok) {
+          toast({
+            title: "Project added succesfully.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
           });
+        } else {
+          toast({
+            title: "Some errored occured !",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     }
   };
@@ -120,6 +126,8 @@ export default function ProfileCard() {
       rounded={"md"}
       justifyContent="space-between"
       flexWrap="wrap"
+      bg="white"
+      boxShadow={"md"}
     >
       <HStack alignItems="center" spacing={"2"}>
         <Avatar
@@ -148,7 +156,7 @@ export default function ProfileCard() {
       </HStack>
       <HStack spacing={"2"}>
         <IconButton
-          colorScheme={"gray"}
+          colorScheme={"purple"}
           variant="solid"
           aria-label="Subscribe"
           rounded={"full"}
@@ -160,7 +168,7 @@ export default function ProfileCard() {
           }}
         />
         <IconButton
-          colorScheme={"gray"}
+          colorScheme={"purple"}
           variant="solid"
           aria-label="Subscribe"
           rounded={"full"}
@@ -202,17 +210,27 @@ export default function ProfileCard() {
               ) : (
                 <>
                   <Input
-                    placeholder="Name"
+                    placeholder="Enter project name"
                     name="name"
                     onChange={handleChange}
                   />
                   <Textarea
-                    placeholder="Description"
+                    placeholder="Enter project description"
                     name="description"
                     onChange={handleChange}
                   />
                   <Input
-                    placeholder="Link"
+                    placeholder="image"
+                    name="image"
+                    onChange={handleChange}
+                  />
+                  <Input
+                    placeholder="Enter github link"
+                    name="github"
+                    onChange={handleChange}
+                  />
+                  <Input
+                    placeholder="Enter deployed link"
                     name="link"
                     onChange={handleChange}
                   />
