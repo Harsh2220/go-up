@@ -31,15 +31,17 @@ export default function Project() {
   const user = useSelector((state) => state.userData);
   const comments = useSelector((state) => state.commentsData);
 
-  console.log(comments, user);
-
   const currentProject = projects.allProjects?.find(
     (project) => project.id === id
   );
 
-  const owner = user.allUsers?.find(
-    (user) => user.auth_id == currentProject.user_id
-  );
+  let owner = null;
+
+  if (currentProject) {
+    owner = user.allUsers?.find(
+      (user) => user.auth_id == currentProject.user_id
+    );
+  }
 
   const addComment = async () => {
     const project_id = id;
@@ -53,7 +55,6 @@ export default function Project() {
     });
     const commentData = await addedComment.json();
     if (addedComment.ok) {
-      dispatch(allComments(commentData.allComments));
       toast({
         title: "Comment added succesfully.",
         status: "success",
