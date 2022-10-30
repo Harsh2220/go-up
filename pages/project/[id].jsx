@@ -44,6 +44,15 @@ export default function Project() {
   }
 
   const addComment = async () => {
+    if (!user.authenticated) {
+      toast({
+        title: "Please login to add comment",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
     const project_id = id;
     const user_id = owner?.id;
     const addedComment = await fetch("/api/addComment", {

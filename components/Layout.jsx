@@ -17,18 +17,18 @@ export default function Layout({ children }) {
     const name = user?.name;
     const image = user?.picture;
 
-    const setUser = await fetch("/api/setuser", {
+    const fetchedUser = await fetch("/api/setuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ user_id, name, image }),
     });
-    const UserData = await setUser.json();
-    if (!setUser.ok) {
+    const UserData = await fetchedUser.json();
+    if (!fetchedUser.ok) {
       toast({
-        title: "Please login to explore !!",
-        status: "error",
+        title: "Please login to add projects !!",
+        status: "info",
         duration: 5000,
         isClosable: true,
       });
@@ -56,36 +56,41 @@ export default function Layout({ children }) {
     }
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      setUser();
+  const getProjects = async () => {
+    const projects = await fetch("/api/getProjects", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const projectsData = await projects.json();
+    if (projects.ok) {
+      dispatch(allProjects(projectsData.allProjects));
     }
-  }, [isLoading]);
+  };
+
+  const getUsers = async () => {
+    const users = await fetch("/api/getUsers", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const usersData = await users.json();
+    if (users.ok) {
+      dispatch(allUsers(usersData.allUsers));
+    }
+  };
 
   useEffect(() => {
-    fetch("/api/getProjects", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(allProjects(data.allProjects));
-      });
-
-    fetch("/api/getUsers", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(allUsers(data.allUsers));
-      });
-    getComments();
-  });
+    if (user) {
+      setUser();
+    } else {
+      getUsers();
+      getProjects();
+      getComments();
+    }
+  }, [user]);
 
   return (
     <>
