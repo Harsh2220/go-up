@@ -122,7 +122,7 @@ export default function ProfileCard() {
   return (
     <Flex
       mt={10}
-      p={["undefined", 5]}
+      p={5}
       rounded={"md"}
       justifyContent="space-between"
       flexWrap="wrap"
@@ -136,7 +136,10 @@ export default function ProfileCard() {
           size="md"
           mr={[1, 2]}
         />
-        <Flex flexDirection={["column", "row"]} alignItems="center">
+        <Flex
+          flexDirection={["column", "row"]}
+          alignItems={["start", "center"]}
+        >
           <Text fontSize="md" fontWeight="semibold">
             {user.currentUser?.name}
           </Text>
@@ -149,7 +152,12 @@ export default function ProfileCard() {
               mx={2}
             />
           ) : null}
-          <Text fontSize="md" fontWeight="semibold">
+          <Text
+            fontSize={["sm", "md"]}
+            fontWeight="semibold"
+            lineHeight={[1, "unset"]}
+            color={["gray.500", "black"]}
+          >
             {user.currentUser?.description}
           </Text>
         </Flex>

@@ -81,7 +81,7 @@ export default function Project() {
   };
 
   return (
-    <Container maxW={"7xl"} minH={"100vh"}>
+    <Container maxW={"7xl"} minH={"100vh"} p={[0, 4]}>
       <Flex
         justifyContent={"space-between"}
         gap={5}
@@ -96,14 +96,14 @@ export default function Project() {
             objectFit={"cover"}
             roundedTop={"lg"}
           />
-          <Box py={4} px={["unset", 4]}>
+          <Box py={4} px={4}>
             <Heading>{currentProject?.name}</Heading>
             <Text mt={2} fontSize={"lg"}>
               {currentProject?.description}
             </Text>
             <Divider mt={4} />
           </Box>
-          <Box py={4} px={["unset", 4]}>
+          <Box py={4} px={4}>
             <Heading fontSize={"2xl"}>Comments</Heading>
             <Flex my={12} gap={4}>
               <Avatar
@@ -142,7 +142,13 @@ export default function Project() {
             )}
           </Box>
         </Box>
-        <Flex flexDirection={["column", "row", "column"]} gap={[0, 5, 0]}>
+        <Flex
+          flexDirection={["column", "row", "column"]}
+          gap={[0, 5, 0]}
+          position={["unset", "unset", "sticky"]}
+          top={["unset", "unset", 20]}
+          height={"fit-content"}
+        >
           <Flex
             w={["full", "1/2", "xs"]}
             p={3}

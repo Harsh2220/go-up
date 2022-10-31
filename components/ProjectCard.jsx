@@ -21,7 +21,7 @@ export default function ProjectCard({ id, name, desc, image }) {
 
   return (
     <Box
-      w={["full", "sm"]}
+      w={["full", "xs"]}
       boxShadow={"lg"}
       rounded={"lg"}
       my={5}
@@ -32,16 +32,16 @@ export default function ProjectCard({ id, name, desc, image }) {
       <Box h={"200px"}>
         <Img src={image} objectFit="cover" h="full" w="full" alt={name} />
       </Box>
-      <Flex flexDir={"column"} p={4}>
+      <Box p={4}>
         <Box>
           <Heading fontSize={"2xl"} noOfLines={1}>
             {name}
           </Heading>
-          <Text color={"gray.500"} noOfLines={5}>
+          <Text color={"gray.500"} noOfLines={1}>
             {desc}
           </Text>
         </Box>
-        <HStack mt={6} justifyContent="space-between">
+        <HStack mt={4} justifyContent="space-between">
           <Button
             colorScheme="purple"
             size="md"
@@ -70,7 +70,7 @@ export default function ProjectCard({ id, name, desc, image }) {
             )}
           </Stack> */}
         </HStack>
-      </Flex>
+      </Box>
     </Box>
   );
 }
