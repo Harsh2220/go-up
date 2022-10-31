@@ -193,6 +193,7 @@ export default function ProfileCard() {
         placement="right"
         onClose={onClose}
         finalFocusRef={addProject}
+        size={["full", "xs"]}
       >
         <DrawerOverlay />
         <DrawerContent>
