@@ -43,19 +43,6 @@ export default function Layout({ children }) {
     }
   };
 
-  const getComments = async () => {
-    const getComment = await fetch("/api/getComments", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const comments = await getComment.json();
-    if (getComment.ok) {
-      dispatch(allComments(comments));
-    }
-  };
-
   const getProjects = async () => {
     const projects = await fetch("/api/getProjects", {
       method: "GET",
@@ -82,6 +69,19 @@ export default function Layout({ children }) {
     }
   };
 
+  const getComments = async () => {
+    const getComment = await fetch("/api/getComments", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const comments = await getComment.json();
+    if (getComment.ok) {
+      dispatch(allComments(comments));
+    }
+  };
+
   useEffect(() => {
     if (user) {
       setUser();
@@ -91,6 +91,7 @@ export default function Layout({ children }) {
       getComments();
     }
   }, [user]);
+
   return (
     <>
       <Navbar />

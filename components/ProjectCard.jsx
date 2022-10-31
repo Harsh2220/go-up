@@ -2,15 +2,12 @@ import {
   Box,
   Heading,
   Text,
-  Stack,
-  Avatar,
   Img,
   HStack,
   Button,
   Flex,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -33,7 +30,7 @@ export default function ProjectCard({ id, name, desc, image }) {
       bg="white"
     >
       <Box h={"200px"}>
-        <Img src={image} objectFit="cover" h="full" w="full" />
+        <Img src={image} objectFit="cover" h="full" w="full" alt={name} />
       </Box>
       <Flex flexDir={"column"} p={4}>
         <Box>
