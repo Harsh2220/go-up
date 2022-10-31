@@ -91,7 +91,6 @@ export default function Layout({ children }) {
       getComments();
     }
   }, [user]);
-
   return (
     <>
       <Navbar />
