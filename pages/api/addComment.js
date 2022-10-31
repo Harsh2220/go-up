@@ -5,8 +5,6 @@ export default async function handler(req, res) {
     try {
       const { user_id, comment, project_id } = req.body;
 
-      console.log(req.body);
-
       const addedComment = await prisma.comments.create({
         data: {
           user_id,
@@ -18,7 +16,6 @@ export default async function handler(req, res) {
           },
         },
       });
-      console.log(addedComment);
       res.status(200).json(addedComment);
     } catch (error) {
       console.log(error);

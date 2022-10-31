@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
 import { useToast } from "@chakra-ui/react";
