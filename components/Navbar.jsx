@@ -22,7 +22,14 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <Box position={"sticky"} top={0} zIndex="1">
+    <Box
+      position={"sticky"}
+      top={0}
+      zIndex="1"
+      bg="rgba(255, 255, 255, 0.07)"
+      boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+      backdropFilter="blur(3px)"
+    >
       <Container maxW={"8xl"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box
