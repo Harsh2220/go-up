@@ -90,7 +90,7 @@ export default function Project() {
       >
         <Box w="full" rounded={"lg"} bg="white" boxShadow={"lg"}>
           <Img
-            src={currentProject?.image}
+            src={currentProject?.image ? currentProject?.image : "/logo.svg"}
             h="96"
             w="full"
             objectFit={"cover"}
@@ -123,22 +123,24 @@ export default function Project() {
               />
             </Flex>
             {comments?.allComments?.map((comment) =>
-              user?.allUsers?.map((el) =>
-                el.id === comment.user_id ? (
-                  <Flex my={8} gap={4} key={comment?.id}>
-                    <Avatar size={"sm"} src={el?.image} name={el?.name} />
-                    <Box
-                      p={4}
-                      rounded="md"
-                      border={"1px"}
-                      borderColor={"gray.200"}
-                    >
-                      <Heading fontSize={"md"}>{el?.name}</Heading>
-                      <Text>{comment?.comment}</Text>
-                    </Box>
-                  </Flex>
-                ) : null
-              )
+              comment.project_id === id
+                ? user?.allUsers?.map((el) =>
+                    el.id === comment.user_id ? (
+                      <Flex my={8} gap={4} key={comment?.id}>
+                        <Avatar size={"sm"} src={el?.image} name={el?.name} />
+                        <Box
+                          p={4}
+                          rounded="md"
+                          border={"1px"}
+                          borderColor={"gray.200"}
+                        >
+                          <Heading fontSize={"md"}>{el?.name}</Heading>
+                          <Text>{comment?.comment}</Text>
+                        </Box>
+                      </Flex>
+                    ) : null
+                  )
+                : null
             )}
           </Box>
         </Box>

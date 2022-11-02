@@ -30,7 +30,13 @@ export default function ProjectCard({ id, name, desc, image }) {
       bg="white"
     >
       <Box h={"200px"}>
-        <Img src={image} objectFit="cover" h="full" w="full" alt={name} />
+        <Img
+          src={image ? image : "logo.svg"}
+          objectFit="cover"
+          h="full"
+          w="full"
+          alt={name}
+        />
       </Box>
       <Box p={4}>
         <Box>
