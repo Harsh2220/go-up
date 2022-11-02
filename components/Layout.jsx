@@ -1,13 +1,15 @@
 import Navbar from "./Navbar";
 import { useUser } from "@auth0/nextjs-auth0";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
 import { Box, useToast } from "@chakra-ui/react";
 import { allComments } from "../context/slices/commentSlice";
+import Loader from "./Loader";
 
 export default function Layout({ children }) {
+  const [Loading, setLoading] = useState(false);
   const { user, error, isLoading } = useUser();
   const dispatch = useDispatch();
   const toast = useToast();
@@ -90,19 +92,28 @@ export default function Layout({ children }) {
       getProjects();
       getComments();
     }
+    setTimeout(() => {
+      setLoading(true);
+    }, 8000);
   }, [user]);
 
   return (
-    <Box
-      bgImage={"/bg.png"}
-      bgRepeat={"no-repeat"}
-      bgSize={"cover"}
-      bgPos={"center"}
-      bgAttachment={"fixed"}
-      minH={"100vh"}
-    >
-      <Navbar />
-      {children}
-    </Box>
+    <>
+      {!Loading ? (
+        <Loader />
+      ) : (
+        <Box
+          bgImage={"/bg.webp"}
+          bgRepeat={"no-repeat"}
+          bgSize={"cover"}
+          bgPos={"center"}
+          bgAttachment={"fixed"}
+          minH={"100vh"}
+        >
+          <Navbar />
+          {children}
+        </Box>
+      )}
+    </>
   );
 }
