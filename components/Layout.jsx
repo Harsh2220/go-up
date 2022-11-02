@@ -94,7 +94,7 @@ export default function Layout({ children }) {
     }
     setTimeout(() => {
       setLoading(true);
-    }, 8000);
+    }, 4000);
   }, [user]);
 
   return (
