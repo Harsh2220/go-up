@@ -22,7 +22,7 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <Box bg="gray.100" position={"sticky"} top={0} zIndex="1">
+    <Box position={"sticky"} top={0} zIndex="1">
       <Container maxW={"8xl"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box
@@ -90,14 +90,8 @@ export default function Navbar() {
               </Flex>
             ) : (
               <Button
-                colorScheme="green"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="center"
-                w={{
-                  base: "full",
-                  sm: "auto",
-                }}
+                colorScheme="orange"
+                rounded={"md"}
                 size="md"
                 cursor="pointer"
                 onClick={() => {

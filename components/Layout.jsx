@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
-import { useToast } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 import { allComments } from "../context/slices/commentSlice";
 
 export default function Layout({ children }) {
@@ -93,9 +93,16 @@ export default function Layout({ children }) {
   }, [user]);
 
   return (
-    <>
+    <Box
+      bgImage={"/bg.png"}
+      bgRepeat={"no-repeat"}
+      bgSize={"cover"}
+      bgPos={"center"}
+      bgAttachment={"fixed"}
+      minH={"100vh"}
+    >
       <Navbar />
       {children}
-    </>
+    </Box>
   );
 }
