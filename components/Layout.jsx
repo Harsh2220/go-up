@@ -9,7 +9,7 @@ import { allComments } from "../context/slices/commentSlice";
 import Loader from "./Loader";
 
 export default function Layout({ children }) {
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const { user, error, isLoading } = useUser();
   const dispatch = useDispatch();
   const toast = useToast();
@@ -92,9 +92,9 @@ export default function Layout({ children }) {
       getProjects();
       getComments();
     }
-    setTimeout(() => {
-      setLoading(true);
-    }, 4000);
+    // setTimeout(() => {
+    //   setLoading(true);
+    // }, 4000);
   }, [user]);
 
   return (

@@ -24,7 +24,7 @@ import { FiEdit } from "react-icons/fi";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUser } from "../context/slices/userSlice";
-import { allProjects } from "../context/slices/projectSlice";
+import { addNewProject, allProjects } from "../context/slices/projectSlice";
 
 export default function ProfileCard() {
   const addProject = useRef();
@@ -101,6 +101,7 @@ export default function ProfileCard() {
         });
         const projectData = await addProject.json();
         if (addProject.ok) {
+          dispatch(addNewProject(projectData));
           toast({
             title: "Project added succesfully.",
             status: "success",

@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaGithub } from "react-icons/fa";
 import { BsLink45Deg } from "react-icons/bs";
 import { useState } from "react";
-import { allComments } from "../../context/slices/commentSlice";
+import { addNewComment } from "../../context/slices/commentSlice";
 
 export default function Project() {
   const [comment, setComment] = useState(null);
@@ -64,6 +64,7 @@ export default function Project() {
     });
     const commentData = await addedComment.json();
     if (addedComment.ok) {
+      dispatch(addNewComment(commentData));
       toast({
         title: "Comment added succesfully.",
         status: "success",
@@ -117,7 +118,6 @@ export default function Project() {
                   if (e.keyCode === 13) {
                     addComment();
                     e.target.value = "";
-                    console.log("entered");
                   }
                 }}
               />

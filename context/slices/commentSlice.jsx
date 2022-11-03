@@ -11,9 +11,12 @@ export const commentSlice = createSlice({
     allComments: (state, action) => {
       state.allComments = action.payload;
     },
+    addNewComment: (state, action) => {
+      state.allComments = [...state.allComments, action.payload];
+    },
   },
 });
 
-export const { allComments } = commentSlice.actions;
+export const { allComments, addNewComment } = commentSlice.actions;
 
 export default commentSlice.reducer;
