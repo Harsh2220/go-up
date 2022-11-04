@@ -122,26 +122,29 @@ export default function Project() {
                 }}
               />
             </Flex>
-            {comments?.allComments?.map((comment) =>
-              comment.project_id === id
-                ? user?.allUsers?.map((el) =>
-                    el.id === comment.user_id ? (
-                      <Flex my={8} gap={4} key={comment?.id}>
-                        <Avatar size={"sm"} src={el?.image} name={el?.name} />
-                        <Box
-                          p={4}
-                          rounded="md"
-                          border={"1px"}
-                          borderColor={"gray.200"}
-                        >
-                          <Heading fontSize={"md"}>{el?.name}</Heading>
-                          <Text>{comment?.comment}</Text>
-                        </Box>
-                      </Flex>
-                    ) : null
-                  )
-                : null
-            )}
+            {comments?.allComments
+              ?.slice(0)
+              .reverse()
+              .map((comment) =>
+                comment.project_id === id
+                  ? user?.allUsers?.map((el) =>
+                      el.id === comment.user_id ? (
+                        <Flex my={8} gap={4} key={comment?.id}>
+                          <Avatar size={"sm"} src={el?.image} name={el?.name} />
+                          <Box
+                            p={4}
+                            rounded="md"
+                            border={"1px"}
+                            borderColor={"gray.200"}
+                          >
+                            <Heading fontSize={"md"}>{el?.name}</Heading>
+                            <Text>{comment?.comment}</Text>
+                          </Box>
+                        </Flex>
+                      ) : null
+                    )
+                  : null
+              )}
           </Box>
         </Box>
         <Flex
