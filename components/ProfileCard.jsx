@@ -20,6 +20,7 @@ import {
   useToast,
   Center,
   AvatarBadge,
+  Img,
 } from "@chakra-ui/react";
 import { BiPlus } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
@@ -36,6 +37,7 @@ export default function ProfileCard() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editProfile, setEditProfile] = useState(false);
   const [projectImage, setProjectImage] = useState(null);
+  const [previewURL, setPreviewURL] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [avatarImage, setAvatarImage] = useState(null);
   const user = useSelector((state) => state.userData);
@@ -286,8 +288,12 @@ export default function ProfileCard() {
                     style={{ display: "none" }}
                     onChange={(e) => {
                       setProjectImage(e.target.files[0]);
+                      setPreviewURL(URL.createObjectURL(e.target.files[0]));
                     }}
                   />
+                  {previewURL ? (
+                    <Img src={previewURL} w="full" h={64} objectFit="contain" />
+                  ) : null}
                 </>
               )}
             </Stack>
