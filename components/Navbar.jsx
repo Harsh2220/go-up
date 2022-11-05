@@ -3,7 +3,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  chakra,
   Button,
   Menu,
   MenuButton,

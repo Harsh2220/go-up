@@ -54,7 +54,7 @@ export default function Project() {
       return;
     }
     const project_id = id;
-    const user_id = owner?.id;
+    const user_id = user.currentUser?.name;
     const addedComment = await fetch("/api/addComment", {
       method: "POST",
       headers: {
