@@ -1,4 +1,4 @@
-export default async function uploadImage(projectImage) {
+export default async function UploadImage(projectImage) {
   const formdata = new FormData();
   formdata.append("file", projectImage);
   formdata.append("upload_preset", process.env.NEXT_PUBLIC_PRESET_NAME);

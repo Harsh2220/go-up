@@ -26,10 +26,10 @@ import { FiEdit } from "react-icons/fi";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUser } from "../context/slices/userSlice";
-import { addNewProject } from "../context/slices/projectSlice";
 import { SmallCloseIcon } from "@chakra-ui/icons";
-import uploadImage from "../utils/uploadImage";
-import { useEffect } from "react";
+import UploadImage from "../utils/uploadImage";
+import AddProject from "../utils/addProject";
+import EditProfile from "../utils/editProfile";
 
 export default function ProfileCard() {
   const addProject = useRef();
@@ -71,61 +71,19 @@ export default function ProfileCard() {
 
   const handleSubmit = async () => {
     if (editProfile) {
-      const imageData = await uploadImage(avatarImage);
-      userData.image = imageData.url;
+      if (avatarImage) {
+        const imageData = await UploadImage(avatarImage);
+        userData.image = imageData.url;
+      }
       userData.user_id = user.currentUser?.auth_id;
-      const update = await fetch("/api/updateProfile", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-      const updatedData = await update.json();
-      if (update.ok) {
-        dispatch(currentUser(updatedData.user));
-        toast({
-          title: "Profile updated succesfully.",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Some errored occured !",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-      }
+      EditProfile(userData, toast, dispatch);
     } else {
-      const imageData = await uploadImage(projectImage);
-      project.image = imageData.url;
-      project.user_id = user.currentUser.auth_id;
-      const addProject = await fetch("/api/addProject", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json ",
-        },
-        body: JSON.stringify(project),
-      });
-      const projectData = await addProject.json();
-      if (addProject.ok) {
-        dispatch(addNewProject(projectData));
-        toast({
-          title: "Project added succesfully.",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Some errored occured !",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+      if (projectImage) {
+        const imageData = await UploadImage(projectImage);
+        project.image = imageData.url;
       }
+      project.user_id = user.currentUser.auth_id;
+      AddProject(project, toast, dispatch);
       setproject({
         user_id: "",
         name: "",
