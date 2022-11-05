@@ -3,7 +3,7 @@ import prisma from "../../lib/prisma";
 export default async function handler(req, res) {
   if (req.method === "PUT") {
     try {
-      const { user_id, name, description } = req.body;
+      const { user_id, name, description, image } = req.body;
 
       const user = await prisma.profile.update({
         where: {
@@ -12,6 +12,7 @@ export default async function handler(req, res) {
         data: {
           name,
           description,
+          image,
         },
       });
       res.status(200).json({ user: user });
