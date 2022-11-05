@@ -42,10 +42,6 @@ export default function ProfileCard() {
   const toast = useToast();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setAvatar(user.currentUser?.image);
-  }, []);
-
   const [userData, setuserData] = useState({
     user_id: "",
     name: "",
@@ -194,6 +190,7 @@ export default function ProfileCard() {
           ref={addProject}
           onClick={() => {
             setEditProfile(true);
+            setAvatar(user.currentUser?.image);
             onOpen();
           }}
         />
@@ -215,7 +212,6 @@ export default function ProfileCard() {
         placement="right"
         onClose={onClose}
         finalFocusRef={addProject}
-        size={["full", "xs"]}
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -271,6 +267,7 @@ export default function ProfileCard() {
                         style={{ display: "none" }}
                         onChange={(e) => {
                           setAvatarImage(e.target.files[0]);
+                          setAvatar(URL.createObjectURL(e.target.files[0]));
                         }}
                       />
                     </Center>
