@@ -8,15 +8,18 @@ export default function Projects() {
   return (
     <Container maxW={"8xl"}>
       <Flex justifyContent="center" flexWrap="wrap" py={5}>
-        {projects?.allProjects?.map((project) => (
-          <ProjectCard
-            key={project.id}
-            id={project.id}
-            name={project.name}
-            desc={project.description}
-            image={project.image}
-          />
-        ))}
+        {projects?.allProjects
+          ?.slice(0)
+          .reverse()
+          .map((project) => (
+            <ProjectCard
+              key={project.id}
+              id={project.id}
+              name={project.name}
+              desc={project.description}
+              image={project.image}
+            />
+          ))}
       </Flex>
     </Container>
   );

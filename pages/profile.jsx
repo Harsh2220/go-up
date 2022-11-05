@@ -18,17 +18,20 @@ export default function Profile() {
           pb={10}
           mb={5}
         >
-          {projects?.allProjects?.map((project) =>
-            project.user_id === user.currentUser?.auth_id ? (
-              <ProjectCard
-                key={project.id}
-                id={project.id}
-                name={project.name}
-                desc={project.description}
-                image={project.image}
-              />
-            ) : null
-          )}
+          {projects?.allProjects
+            ?.slice(0)
+            .reverse()
+            .map((project) =>
+              project.user_id === user.currentUser?.auth_id ? (
+                <ProjectCard
+                  key={project.id}
+                  id={project.id}
+                  name={project.name}
+                  desc={project.description}
+                  image={project.image}
+                />
+              ) : null
+            )}
         </Flex>
       </Flex>
     </Container>
