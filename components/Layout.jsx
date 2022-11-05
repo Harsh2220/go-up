@@ -6,6 +6,7 @@ import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
 import { Box, useToast } from "@chakra-ui/react";
 import { allComments } from "../context/slices/commentSlice";
+import { supabase } from "../lib/supabase";
 import Loader from "./Loader";
 
 export default function Layout({ children }) {
@@ -83,6 +84,26 @@ export default function Layout({ children }) {
       dispatch(allComments(comments));
     }
   };
+
+  useEffect(() => {
+    const subscritpion = supabase
+      .channel("*")
+      .on("postgres_changes", { event: "*", schema: "*" }, (payload) => {
+        console.log("Change received!", payload);
+        if (payload.table === "comments") {
+          getComments();
+        } else if (payload.table === "profile") {
+          getUsers();
+        } else if (payload.table === "project") {
+          getProjects();
+        }
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscritpion);
+    };
+  }, []);
 
   useEffect(() => {
     if (user) {
