@@ -1,3 +1,4 @@
+import {setLoading} from "../context/slices/loadingSlice";
 import { currentUser } from "../context/slices/userSlice";
 
 export default async function EditProfile(userData, toast, dispatch) {
@@ -11,6 +12,7 @@ export default async function EditProfile(userData, toast, dispatch) {
   const updatedData = await update.json();
   if (update.ok) {
     dispatch(currentUser(updatedData.user));
+    dispatch(setLoading(false));
     toast({
       title: "Profile updated succesfully.",
       status: "success",
@@ -18,6 +20,7 @@ export default async function EditProfile(userData, toast, dispatch) {
       isClosable: true,
     });
   } else {
+    dispatch(setLoading(false));
     toast({
       title: "Some errored occured !",
       status: "error",

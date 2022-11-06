@@ -26,11 +26,11 @@ import { BiPlus } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currentUser } from "../context/slices/userSlice";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import UploadImage from "../utils/uploadImage";
 import AddProject from "../utils/addProject";
 import EditProfile from "../utils/editProfile";
+import { setLoading } from "../context/slices/loadingSlice";
 
 export default function ProfileCard() {
   const addProject = useRef();
@@ -41,6 +41,7 @@ export default function ProfileCard() {
   const [avatar, setAvatar] = useState(null);
   const [avatarImage, setAvatarImage] = useState(null);
   const user = useSelector((state) => state.userData);
+  const Loading = useSelector((state) => state.loadingState.isLoading);
   const toast = useToast();
   const dispatch = useDispatch();
 
@@ -72,6 +73,7 @@ export default function ProfileCard() {
   };
 
   const handleSubmit = async () => {
+    dispatch(setLoading(true));
     if (editProfile) {
       if (avatarImage) {
         const imageData = await UploadImage(avatarImage);
@@ -86,14 +88,6 @@ export default function ProfileCard() {
       }
       project.user_id = user.currentUser.auth_id;
       AddProject(project, toast, dispatch);
-      setproject({
-        user_id: "",
-        name: "",
-        description: "",
-        image: null,
-        github: null,
-        link: null,
-      });
     }
   };
 

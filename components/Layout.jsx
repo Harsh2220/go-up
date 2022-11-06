@@ -1,19 +1,19 @@
 import Navbar from "./Navbar";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
-import { Box, useToast } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { allComments } from "../context/slices/commentSlice";
 import { supabase } from "../lib/supabase";
 import Loader from "./Loader";
+import { setLoading } from "../context/slices/loadingSlice";
 
 export default function Layout({ children }) {
-  const [Loading, setLoading] = useState(true);
+  const Loading = useSelector((state) => state.loadingState.isLoading);
   const { user, error, isLoading } = useUser();
   const dispatch = useDispatch();
-  const toast = useToast();
 
   const setUser = async () => {
     const user_id = user?.email;
@@ -28,21 +28,9 @@ export default function Layout({ children }) {
       body: JSON.stringify({ user_id, name, image }),
     });
     const UserData = await fetchedUser.json();
-    if (!fetchedUser.ok) {
-      toast({
-        title: "Please login to add projects !!",
-        status: "info",
-        duration: 5000,
-        isClosable: true,
-      });
-    } else {
+    if (fetchedUser.ok) {
       dispatch(currentUser(UserData.user));
-      toast({
-        title: "Logged in succesfully.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      dispatch(setLoading(false));
     }
   };
 
@@ -89,7 +77,6 @@ export default function Layout({ children }) {
     const subscritpion = supabase
       .channel("*")
       .on("postgres_changes", { event: "*", schema: "*" }, (payload) => {
-        console.log("Change received!", payload);
         if (payload.table === "comments") {
           getComments();
         } else if (payload.table === "profile") {
@@ -113,14 +100,11 @@ export default function Layout({ children }) {
       getProjects();
       getComments();
     }
-    // setTimeout(() => {
-    //   setLoading(true);
-    // }, 4000);
   }, [user]);
 
   return (
     <>
-      {!Loading ? (
+      {Loading ? (
         <Loader />
       ) : (
         <Box
