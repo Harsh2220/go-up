@@ -9,15 +9,40 @@ export default function Profile() {
 
   return (
     <Container maxW="8xl">
-      <Flex direction={["column", "column", "column"]} justifyContent="center">
+      <Flex
+        direction={["column", "column", "row-reverse"]}
+        justifyContent="space-between"
+      >
         <ProfileCard />
-        <Flex
-          justifyContent="center"
-          flexWrap="wrap"
-          rounded={"md"}
-          pb={10}
-          mb={5}
-        >
+        <Flex justifyContent={"center"} flexWrap="wrap" rounded={"md"}>
+          {projects?.allProjects
+            ?.slice(0)
+            .reverse()
+            .map((project) =>
+              project.user_id === user.currentUser?.auth_id ? (
+                <ProjectCard
+                  key={project.id}
+                  id={project.id}
+                  name={project.name}
+                  desc={project.description}
+                  image={project.image}
+                />
+              ) : null
+            )}
+          {projects?.allProjects
+            ?.slice(0)
+            .reverse()
+            .map((project) =>
+              project.user_id === user.currentUser?.auth_id ? (
+                <ProjectCard
+                  key={project.id}
+                  id={project.id}
+                  name={project.name}
+                  desc={project.description}
+                  image={project.image}
+                />
+              ) : null
+            )}
           {projects?.allProjects
             ?.slice(0)
             .reverse()

@@ -1,45 +1,33 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Img,
-  HStack,
-  Button,
-  Flex,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Img, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import {
-  AiOutlineHeart,
-  AiFillHeart,
-  AiOutlineArrowRight,
-} from "react-icons/ai";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowUpRight } from "react-icons/bs";
 
 export default function ProjectCard({ id, name, desc, image }) {
-  // const [like, setLike] = useState(false);
   const router = useRouter();
 
   return (
     <Box
       w={["full", "xs"]}
-      boxShadow={"lg"}
+      // boxShadow={"lg"}
       rounded={"lg"}
       my={5}
       mx={[0, 5]}
       overflow={"hidden"}
       bg="white"
+      border={"1px"}
     >
       <Box h={"200px"}>
         <Img
           src={image ? image : "logo.svg"}
+          roundedTop={"lg"}
           objectFit="cover"
           h="full"
           w="full"
           alt={name}
         />
       </Box>
-      <Box p={4}>
-        <Box>
+      <Box>
+        <Box p={4}>
           <Heading fontSize={"2xl"} noOfLines={1}>
             {name}
           </Heading>
@@ -47,33 +35,35 @@ export default function ProjectCard({ id, name, desc, image }) {
             {desc}
           </Text>
         </Box>
-        <HStack mt={4} justifyContent="space-between">
-          <Button
-            colorScheme="purple"
-            rightIcon={<BsArrowRight />}
-            onClick={() => {
-              router.push(`/project/${id}`);
-            }}
-          >
-            View More
-          </Button>
-          {/* <Stack alignItems="center" justifyContent="center">
-            {like ? (
-              <AiFillHeart
-                fontSize={"28px"}
-                onClick={() => setLike(false)}
-                fill="red"
-                cursor="pointer"
-              />
-            ) : (
-              <AiOutlineHeart
-                fontSize={"28px"}
-                onClick={() => setLike(true)}
-                cursor="pointer"
-              />
-            )}
-          </Stack> */}
-        </HStack>
+        <Flex
+          bg="purple.200"
+          p={4}
+          alignItems="center"
+          justifyContent={"space-between"}
+          roundedBottom={"lg"}
+          cursor={"pointer"}
+          onClick={() => {
+            router.push(`/project/${id}`);
+          }}
+        >
+          <Text fontSize={"lg"} fontWeight={"semibold"}>
+            View more
+          </Text>
+          <BsArrowUpRight />
+        </Flex>
+        {/* <Button
+          bg='purple.200'
+          p={4}
+          justifyContent={"space-between"}
+          roundedBottom={"lg"}
+          w="full"
+          rightIcon={<BsArrowUpRight />}
+          onClick={() => {
+            router.push(`/project/${id}`);
+          }}
+        >
+          View More
+        </Button> */}
       </Box>
     </Box>
   );

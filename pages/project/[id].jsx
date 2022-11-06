@@ -12,6 +12,7 @@ import {
   chakra,
   Textarea,
   useToast,
+  Button,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -89,7 +90,7 @@ export default function Project() {
         my={[6, 12]}
         flexDirection={["column-reverse", "column-reverse", "row"]}
       >
-        <Box w="full" rounded={"lg"} bg="white" boxShadow={"lg"}>
+        <Box w="full" rounded={"lg"} bg="white" border={"1px"}>
           <Img
             src={currentProject?.image ? currentProject?.image : "/logo.svg"}
             h="96"
@@ -114,13 +115,18 @@ export default function Project() {
               />
               <Textarea
                 onChange={(e) => setComment(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.keyCode === 13) {
-                    addComment();
-                    e.target.value = "";
-                  }
-                }}
+                value={comment}
               />
+              <Button
+                colorScheme={"purple"}
+                px={8}
+                onClick={() => {
+                  setComment("");
+                  addComment();
+                }}
+              >
+                Post
+              </Button>
             </Flex>
             {comments?.allComments
               ?.slice(0)
@@ -159,7 +165,7 @@ export default function Project() {
             p={3}
             rounded={"lg"}
             alignItems="center"
-            boxShadow={"md"}
+            border={"1px"}
             bg="white"
           >
             <Avatar src={owner?.image} name={owner?.name} size={"lg"} />
@@ -178,7 +184,7 @@ export default function Project() {
               p={3}
               rounded={"lg"}
               mt={[4, "unset", 4]}
-              boxShadow={"md"}
+              border={"1px"}
               bg="white"
             >
               <Heading fontSize={"xl"} fontWeight={"semibold"}>
@@ -188,12 +194,20 @@ export default function Project() {
               <Flex pt={2} gap={3}>
                 {currentProject?.github ? (
                   <chakra.a href={currentProject?.github} target="_blank">
-                    <IconButton icon={<FaGithub fontSize={"20px"} />} />
+                    <IconButton
+                      icon={<FaGithub fontSize={"20px"} />}
+                      bg="purple.200"
+                      boxShadow="3px 3px 0 black"
+                    />
                   </chakra.a>
                 ) : null}
                 {currentProject?.link ? (
                   <chakra.a href={currentProject?.link} target="_blank">
-                    <IconButton icon={<BsLink45Deg fontSize={"20px"} />} />
+                    <IconButton
+                      icon={<BsLink45Deg fontSize={"20px"} />}
+                      bg="purple.200"
+                      boxShadow="3px 3px 0 black"
+                    />
                   </chakra.a>
                 ) : null}
               </Flex>

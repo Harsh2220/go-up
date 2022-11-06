@@ -30,7 +30,6 @@ export default function Layout({ children }) {
     const UserData = await fetchedUser.json();
     if (fetchedUser.ok) {
       dispatch(currentUser(UserData.user));
-      dispatch(setLoading(false));
     }
   };
 
@@ -100,6 +99,9 @@ export default function Layout({ children }) {
       getProjects();
       getComments();
     }
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 5000);
   }, [user]);
 
   return (

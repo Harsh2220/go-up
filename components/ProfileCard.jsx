@@ -15,12 +15,13 @@ import {
   Input,
   Textarea,
   Flex,
-  Divider,
   IconButton,
   useToast,
   Center,
   AvatarBadge,
   Img,
+  Box,
+  Heading,
 } from "@chakra-ui/react";
 import { BiPlus } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
@@ -93,74 +94,71 @@ export default function ProfileCard() {
 
   return (
     <Flex
-      mt={10}
+      m={["unset", "unset", 5]}
+      position={["unset", "unset", "sticky"]}
+      top={["unset", "unset", "20"]}
       p={5}
+      direction={["column", "row", "column"]}
       rounded={"md"}
-      justifyContent="space-between"
-      flexWrap="wrap"
       bg="white"
-      boxShadow={"md"}
+      border={"1px"}
+      minW={"xs"}
+      w={["full", "full", "xs"]}
+      h={"fit-content"}
     >
-      <HStack alignItems="center" spacing={"2"}>
+      <HStack alignItems="center">
         <Avatar
           src={user.currentUser?.image}
           name={user.currentUser?.name}
-          size="md"
-          mr={[1, 2]}
+          size="lg"
         />
-        <Flex
-          flexDirection={["column", "row"]}
-          alignItems={["start", "center"]}
-        >
-          <Text fontSize="md" fontWeight="semibold">
+        <Box>
+          <Heading fontSize="lg" fontWeight="semibold">
             {user.currentUser?.name}
-          </Text>
-          {user.currentUser?.description ? (
-            <Divider
-              orientation="vertical"
-              borderColor={"gray.300"}
-              h="28px"
-              display={["none", "block"]}
-              mx={2}
-            />
-          ) : null}
+          </Heading>
           <Text
-            fontSize={["sm", "md"]}
-            fontWeight="semibold"
-            lineHeight={[1, "unset"]}
-            color={["gray.500", "black"]}
+            fontSize={"md"}
+            fontWeight="medium"
+            lineHeight={1}
+            color={"gray.500"}
           >
             {user.currentUser?.description}
           </Text>
-        </Flex>
+        </Box>
       </HStack>
-      <HStack spacing={"2"}>
-        <IconButton
-          colorScheme={"purple"}
-          variant="solid"
-          aria-label="Subscribe"
-          rounded={"full"}
-          icon={<FiEdit />}
+      <Stack spacing={4} mt={5}>
+        <Button
+          colorScheme="white"
+          rightIcon={<FiEdit />}
+          color={"black"}
+          border="1px"
+          boxShadow="6px 6px 0px black"
+          size="md"
           ref={addProject}
           onClick={() => {
             setEditProfile(true);
             setAvatar(user.currentUser?.image);
             onOpen();
           }}
-        />
-        <IconButton
-          colorScheme={"purple"}
-          variant="solid"
-          aria-label="Subscribe"
-          rounded={"full"}
-          icon={<BiPlus />}
+        >
+          Edit profile
+        </Button>
+        <Button
+          colorScheme="white"
+          rightIcon={<BiPlus />}
+          color={"black"}
+          border="1px"
+          boxShadow="6px 6px 0px black"
+          size="md"
           ref={addProject}
           onClick={() => {
             setEditProfile(false);
             onOpen();
           }}
-        />
-      </HStack>
+        >
+          Add project
+        </Button>
+      </Stack>
       <Drawer
         isOpen={isOpen}
         placement="right"

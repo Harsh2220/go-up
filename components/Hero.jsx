@@ -29,13 +29,21 @@ export default function Hero() {
               feedback to the other users projects.
             </Text>
             <Button
-              colorScheme="purple"
+              colorScheme="white"
               w="fit-content"
               rightIcon={<BsArrowRight />}
+              color={"black"}
+              border="1px"
+              boxShadow="6px 6px 0px black"
+              _hover={{
+                boxShadow: "none",
+              }}
+              _focus={{
+                boxShadow: "none",
+              }}
               onClick={() => {
                 router.push("/projects");
               }}
-              cursor="pointer"
             >
               Explore projects
             </Button>

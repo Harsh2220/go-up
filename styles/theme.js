@@ -32,6 +32,13 @@ const theme = extendTheme({
   },
   config,
   fonts,
+  components: {
+    Button: {
+      baseStyle: {
+        rounded: "sm",
+      },
+    },
+  },
 });
 
 export default theme;
