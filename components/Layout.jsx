@@ -107,14 +107,7 @@ export default function Layout({ children }) {
       {Loading ? (
         <Loader />
       ) : (
-        <Box
-          bgImage={"/bg.webp"}
-          bgRepeat={"no-repeat"}
-          bgSize={"cover"}
-          bgPos={"center"}
-          bgAttachment={"fixed"}
-          minH={"100vh"}
-        >
+        <Box minH={"100vh"}>
           <Navbar />
           {children}
         </Box>

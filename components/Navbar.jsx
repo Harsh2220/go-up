@@ -21,24 +21,17 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <Box
-      position={"sticky"}
-      top={0}
-      zIndex="1"
-      bg="rgba(255, 255, 255, 0.07)"
-      boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-      backdropFilter="blur(3px)"
-    >
+    <Box position={"sticky"} top={0} zIndex="1" bg="white">
       <Container maxW={"8xl"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box
+          <Img
+            src="/logo.svg"
+            boxSize={"20"}
             onClick={() => {
               router.push("/");
             }}
             cursor="pointer"
-          >
-            <Img src="/logo.svg" boxSize={"20"} />
-          </Box>
+          />
           <HStack as={"nav"} spacing={4}>
             {user.authenticated ? (
               <Flex alignItems={"center"}>
@@ -96,9 +89,8 @@ export default function Navbar() {
               </Flex>
             ) : (
               <Button
-                colorScheme="orange"
+                colorScheme="purple"
                 rounded={"md"}
-                size="md"
                 cursor="pointer"
                 onClick={() => {
                   router.push("/api/auth/login");

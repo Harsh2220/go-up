@@ -1,4 +1,4 @@
-import {setLoading} from "../context/slices/loadingSlice";
+import { setLoading } from "../context/slices/loadingSlice";
 import { currentUser } from "../context/slices/userSlice";
 
 export default async function EditProfile(userData, toast, dispatch) {

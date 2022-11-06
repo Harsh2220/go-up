@@ -1,10 +1,11 @@
 import {
-  Box,
-  Heading,
-  Container,
-  Text,
   Button,
-  Center,
+  Container,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { BsArrowRight } from "react-icons/bs";
@@ -13,95 +14,37 @@ export default function Hero() {
   const router = useRouter();
 
   return (
-    <Container maxW={"8xl"} h="80vh">
-      <Center h="full">
-        <Box px={["unset", 8]} py={24} mx="auto">
-          <Box
-            w={{
-              base: "full",
-              md: 11 / 12,
-            }}
-            mx="auto"
-            textAlign={{
-              base: "left",
-              md: "center",
-            }}
-          >
-            <Heading
-              mb={6}
-              fontSize={{
-                base: "4xl",
-                md: "8xl",
-              }}
-              fontWeight="bold"
-              letterSpacing={{
-                base: "normal",
-                md: "tight",
-              }}
-              color="gray.900"
-              _dark={{
-                color: "gray.100",
-              }}
-            >
-              All your project feedback in one single place.
+    <Container maxW={"8xl"}>
+      <Stack direction={{ base: "column", md: "row" }} h={"calc(100vh - 64px)"}>
+        <Flex flex={1} align={"center"} justify={"center"}>
+          <Stack spacing={6} w={"full"} maxW={"lg"}>
+            <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
+              <Text>All your project</Text>
+              <Text color={"#4c4ed7"} as={"span"}>
+                feedback in one single place.
+              </Text>
             </Heading>
-            <Text
-              px={{
-                base: 0,
-                lg: 24,
-              }}
-              mb={6}
-              fontSize={{
-                base: "lg",
-                md: "xl",
-              }}
-              color="white"
-            >
-              {/* GoUp is a feedback app where you can add you projects and give
-            feedback to the other users projects. */}
+            <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
+              GoUp is a feedback app where you can add you projects and give
+              feedback to the other users projects.
             </Text>
             <Button
-              // colorScheme="purple"
-              display="inline-flex"
-              alignItems="center"
-              justifyContent="center"
+              colorScheme="purple"
+              w="fit-content"
               rightIcon={<BsArrowRight />}
-              w={{
-                base: "full",
-                sm: "auto",
-              }}
-              mb={{
-                base: 2,
-                sm: 0,
-              }}
               onClick={() => {
                 router.push("/projects");
               }}
-              size="lg"
               cursor="pointer"
             >
               Explore projects
             </Button>
-          </Box>
-          {/* <Box
-          w={{
-            base: "full",
-            md: 10 / 12,
-          }}
-          mx="auto"
-          mt={20}
-          textAlign="center"
-        >
-          <Image
-            w="full"
-            rounded="lg"
-            shadow="2xl"
-            src="https://kutty.netlify.app/hero.jpg"
-            alt="Hellonext feedback boards software screenshot"
-          />
-        </Box> */}
-        </Box>
-      </Center>
+          </Stack>
+        </Flex>
+        <Flex flex={1} justifyContent="center">
+          <Image alt={"Login Image"} objectFit={"contain"} src={"/home.png"} />
+        </Flex>
+      </Stack>
     </Container>
   );
 }

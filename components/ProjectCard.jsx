@@ -50,9 +50,6 @@ export default function ProjectCard({ id, name, desc, image }) {
         <HStack mt={4} justifyContent="space-between">
           <Button
             colorScheme="purple"
-            rounded={"md"}
-            size="md"
-            cursor="pointer"
             rightIcon={<BsArrowRight />}
             onClick={() => {
               router.push(`/project/${id}`);
