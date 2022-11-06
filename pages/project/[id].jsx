@@ -95,8 +95,9 @@ export default function Project() {
             src={currentProject?.image ? currentProject?.image : "/logo.svg"}
             h="96"
             w="full"
-            objectFit={"cover"}
+            objectFit={"contain"}
             roundedTop={"lg"}
+            borderBottom={"1px"}
           />
           <Box py={4} px={4}>
             <Heading>{currentProject?.name}</Heading>

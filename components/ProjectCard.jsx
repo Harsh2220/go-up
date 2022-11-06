@@ -16,11 +16,11 @@ export default function ProjectCard({ id, name, desc, image }) {
       bg="white"
       border={"1px"}
     >
-      <Box h={"200px"}>
+      <Box h={"200px"} borderBottom={"1px"}>
         <Img
           src={image ? image : "logo.svg"}
           roundedTop={"lg"}
-          objectFit="cover"
+          objectFit="contain"
           h="full"
           w="full"
           alt={name}

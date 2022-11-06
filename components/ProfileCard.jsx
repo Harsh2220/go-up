@@ -42,7 +42,6 @@ export default function ProfileCard() {
   const [avatar, setAvatar] = useState(null);
   const [avatarImage, setAvatarImage] = useState(null);
   const user = useSelector((state) => state.userData);
-  const Loading = useSelector((state) => state.loadingState.isLoading);
   const toast = useToast();
   const dispatch = useDispatch();
 
