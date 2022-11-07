@@ -63,7 +63,7 @@ export default function Navbar() {
                         router.push("/profile");
                       }}
                       _hover={{
-                        backgroundColor: "purple.500",
+                        backgroundColor: "#4c4ed7",
                         color: "white",
                       }}
                       roundedTop={"md"}
@@ -77,7 +77,7 @@ export default function Navbar() {
                         router.push("/api/auth/logout");
                       }}
                       _hover={{
-                        backgroundColor: "purple.500",
+                        backgroundColor: "#4c4ed7",
                         color: "white",
                       }}
                       roundedBottom={"md"}

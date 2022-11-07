@@ -8,8 +8,7 @@ export default function ProjectCard({ id, name, desc, image }) {
   return (
     <Box
       w={["full", "xs"]}
-      // boxShadow={"lg"}
-      rounded={"lg"}
+      rounded={"sm"}
       my={5}
       mx={[0, 5]}
       overflow={"hidden"}
@@ -19,7 +18,7 @@ export default function ProjectCard({ id, name, desc, image }) {
       <Box h={"200px"} borderBottom={"1px"}>
         <Img
           src={image ? image : "logo.svg"}
-          roundedTop={"lg"}
+          roundedTop={"sm"}
           objectFit="contain"
           h="full"
           w="full"
@@ -36,12 +35,13 @@ export default function ProjectCard({ id, name, desc, image }) {
           </Text>
         </Box>
         <Flex
-          bg="purple.200"
+          bg="#4c4ed7"
           p={4}
           alignItems="center"
           justifyContent={"space-between"}
-          roundedBottom={"lg"}
+          roundedBottom={"sm"}
           cursor={"pointer"}
+          color="white"
           onClick={() => {
             router.push(`/project/${id}`);
           }}

@@ -98,14 +98,15 @@ export default function ProfileCard() {
       top={["unset", "unset", "20"]}
       p={5}
       direction={["column", "row", "column"]}
-      rounded={"md"}
+      justifyContent="space-between"
+      rounded={"sm"}
       bg="white"
       border={"1px"}
-      minW={"xs"}
+      minW={["unset", "xs"]}
       w={["full", "full", "xs"]}
       h={"fit-content"}
     >
-      <HStack alignItems="center">
+      <HStack alignItems="center" flexWrap={"wrap"}>
         <Avatar
           src={user.currentUser?.image}
           name={user.currentUser?.name}
