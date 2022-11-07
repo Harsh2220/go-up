@@ -56,17 +56,17 @@ export default function Navbar() {
                       name={user.currentUser?.name}
                     />
                   </MenuButton>
-                  <MenuList p={0}>
+                  <MenuList p={0} rounded="sm" border={"1px"}>
                     <MenuItem
                       py={3}
                       onClick={() => {
                         router.push("/profile");
                       }}
                       _hover={{
-                        backgroundColor: "#4c4ed7",
+                        backgroundColor: "primary",
                         color: "white",
                       }}
-                      roundedTop={"md"}
+                      roundedTop={"sm"}
                     >
                       Profile
                     </MenuItem>
@@ -77,10 +77,10 @@ export default function Navbar() {
                         router.push("/api/auth/logout");
                       }}
                       _hover={{
-                        backgroundColor: "#4c4ed7",
+                        backgroundColor: "primary",
                         color: "white",
                       }}
-                      roundedBottom={"md"}
+                      roundedBottom={"sm"}
                     >
                       Signout
                     </MenuItem>
@@ -89,9 +89,11 @@ export default function Navbar() {
               </Flex>
             ) : (
               <Button
-                colorScheme="purple"
-                rounded={"md"}
-                cursor="pointer"
+                variant={"primary"}
+                boxShadow={"4px 4px 0 #ff90e8"}
+                _hover={{
+                  boxShadow: "none",
+                }}
                 onClick={() => {
                   router.push("/api/auth/login");
                 }}

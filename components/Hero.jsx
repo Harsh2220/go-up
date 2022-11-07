@@ -20,7 +20,7 @@ export default function Hero() {
           <Stack spacing={6} w={"full"} maxW={"lg"}>
             <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
               <Text>All your project</Text>
-              <Text color={"#4c4ed7"} as={"span"}>
+              <Text color={"primary"} as={"span"}>
                 feedback in one single place.
               </Text>
             </Heading>
@@ -34,7 +34,7 @@ export default function Hero() {
               rightIcon={<BsArrowRight />}
               color={"black"}
               border="1px"
-              boxShadow="6px 6px 0px black"
+              boxShadow="4px 4px 0px black"
               _hover={{
                 boxShadow: "none",
               }}

@@ -10,6 +10,11 @@ const fonts = {
   body: "Source Sans Pro",
 };
 
+const colors = {
+  primary: "#4c4ed7",
+  secondary: "#ff90e8",
+};
+
 const theme = extendTheme({
   styles: {
     global: {
@@ -32,10 +37,20 @@ const theme = extendTheme({
   },
   config,
   fonts,
+  colors,
   components: {
     Button: {
       baseStyle: {
         rounded: "sm",
+      },
+      variants: {
+        primary: {
+          bg: "#4c4ed7",
+          color: "white",
+        },
+        secondary: {
+          bg: "#ff90e8",
+        },
       },
     },
   },

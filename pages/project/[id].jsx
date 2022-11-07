@@ -90,13 +90,13 @@ export default function Project() {
         my={[6, 12]}
         flexDirection={["column-reverse", "column-reverse", "row"]}
       >
-        <Box w="full" rounded={"lg"} bg="white" border={"1px"}>
+        <Box w="full" rounded={"sm"} bg="white" border={"1px"}>
           <Img
             src={currentProject?.image ? currentProject?.image : "/logo.svg"}
             h="96"
             w="full"
             objectFit={"contain"}
-            roundedTop={"lg"}
+            roundedTop={"sm"}
             borderBottom={"1px"}
           />
           <Box py={4} px={4}>
@@ -115,11 +115,13 @@ export default function Project() {
                 name={user.currentUser?.name}
               />
               <Textarea
+                rows={2}
                 onChange={(e) => setComment(e.target.value)}
                 value={comment}
               />
               <Button
-                colorScheme={"purple"}
+                bg="#4c4ed7"
+                color="white"
                 px={8}
                 onClick={() => {
                   setComment("");
@@ -140,7 +142,7 @@ export default function Project() {
                           <Avatar size={"sm"} src={el?.image} name={el?.name} />
                           <Box
                             p={4}
-                            rounded="md"
+                            rounded="sm"
                             border={"1px"}
                             borderColor={"gray.200"}
                           >
@@ -164,7 +166,7 @@ export default function Project() {
           <Flex
             w={["full", "1/2", "xs"]}
             p={3}
-            rounded={"lg"}
+            rounded={"sm"}
             alignItems="center"
             border={"1px"}
             bg="white"
@@ -183,7 +185,7 @@ export default function Project() {
             <Stack
               w={["full", "1/2", "xs"]}
               p={3}
-              rounded={"lg"}
+              rounded={"sm"}
               mt={[4, "unset", 4]}
               border={"1px"}
               bg="white"
@@ -197,7 +199,7 @@ export default function Project() {
                   <chakra.a href={currentProject?.github} target="_blank">
                     <IconButton
                       icon={<FaGithub fontSize={"20px"} />}
-                      bg="purple.200"
+                      variant="secondary"
                       boxShadow="3px 3px 0 black"
                     />
                   </chakra.a>
@@ -206,7 +208,7 @@ export default function Project() {
                   <chakra.a href={currentProject?.link} target="_blank">
                     <IconButton
                       icon={<BsLink45Deg fontSize={"20px"} />}
-                      bg="purple.200"
+                      variant="secondary"
                       boxShadow="3px 3px 0 black"
                     />
                   </chakra.a>
