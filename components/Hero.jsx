@@ -21,11 +21,11 @@ export default function Hero() {
             <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
               <Text>All your project</Text>
               <Text color={"primary"} as={"span"}>
-                feedback in one single place.
+                feedback at one single place.
               </Text>
             </Heading>
             <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
-              GoUp is a feedback app where you can add you projects and give
+              DevSpace is a feedback app where you can add you projects and give
               feedback to the other users projects.
             </Text>
             <Button

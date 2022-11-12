@@ -46,24 +46,11 @@ export default function ProjectCard({ id, name, desc, image }) {
             router.push(`/project/${id}`);
           }}
         >
-          <Text fontSize={"lg"} fontWeight={"semibold"}>
+          <Text fontSize={"md"} fontWeight={"medium"}>
             View more
           </Text>
           <BsArrowUpRight />
         </Flex>
-        {/* <Button
-          bg='purple.200'
-          p={4}
-          justifyContent={"space-between"}
-          roundedBottom={"lg"}
-          w="full"
-          rightIcon={<BsArrowUpRight />}
-          onClick={() => {
-            router.push(`/project/${id}`);
-          }}
-        >
-          View More
-        </Button> */}
       </Box>
     </Box>
   );

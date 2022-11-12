@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import { useUser } from "@auth0/nextjs-auth0";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUser, allUsers } from "../context/slices/userSlice";
 import { allProjects } from "../context/slices/projectSlice";
@@ -101,7 +101,7 @@ export default function Layout({ children }) {
     }
     setTimeout(() => {
       dispatch(setLoading(false));
-    }, 5000);
+    }, 3000);
   }, [user]);
 
   return (

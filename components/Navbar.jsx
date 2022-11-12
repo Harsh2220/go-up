@@ -12,6 +12,7 @@ import {
   Container,
   Text,
   Img,
+  Heading,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -24,14 +25,17 @@ export default function Navbar() {
     <Box position={"sticky"} top={0} zIndex="1" bg="white">
       <Container maxW={"8xl"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Img
-            src="/logo.svg"
-            boxSize={"20"}
+          <HStack
             onClick={() => {
               router.push("/");
             }}
             cursor="pointer"
-          />
+          >
+            <Img src="/logo.svg" boxSize={[8, 12]} />
+            <Heading fontSize={"2xl"} display={["none", "block"]}>
+              DevSpace
+            </Heading>
+          </HStack>
           <HStack as={"nav"} spacing={4}>
             {user.authenticated ? (
               <Flex alignItems={"center"}>
