@@ -32,9 +32,19 @@ export default function Navbar() {
             cursor="pointer"
           >
             <Img src="/logo.svg" boxSize={[8, 12]} />
-            <Heading fontSize={"2xl"} display={["none", "block"]}>
-              DevSpace
-            </Heading>
+              <Heading fontSize={"2xl"} display={["none", "block"]}>
+                DevSpace
+              </Heading>
+            <Flex justifyContent={"end"}>
+              <Text
+                fontWeight={"semibold"}
+                px={2}
+                w="fit-content"
+                bg={"gray.200"}
+              >
+                Beta
+              </Text>
+            </Flex>
           </HStack>
           <HStack as={"nav"} spacing={4}>
             {user.authenticated ? (
